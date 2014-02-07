@@ -29,9 +29,9 @@
   </build>
 
   <scm>
-    <connection>scm:git:http://git.clearspring.local/ccompressor.git</connection>
-    <developerConnection>scm:git:http://git.clearspring.local/ccompressor.git</developerConnection>
-    <url>scm:git:http://git.clearspring.local/ccompressor.git</url>
+    <connection>scm:git:git@github.com:addthis/columncompressor.git</connection>
+    <developerConnection>scm:git:git@github.com:addthis/columncompressor.git</developerConnection>
+    <url>https://github.com/addthis/columncompressor</url>
     <tag>HEAD</tag>
   </scm>
 
