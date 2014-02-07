@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.addthis.common.build.maven.pom</groupId>
+    <artifactId>jar-pom</artifactId>
+    <version>3.1.0</version>
+  </parent>
+
+  <groupId>com.addthis</groupId>
+  <artifactId>ccompressor</artifactId>
+  <name>Column Compressor</name>
+  <version>0.1.4-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <licenses>
+    <license>
+      <name>AddThis Proprietary</name>
+    </license>
+  </licenses>
+
+  <properties>
+  </properties>
+
+  <modules>
+    <module>core</module>
+  </modules>
+
+  <build>
+  </build>
+
+  <scm>
+    <connection>scm:git:http://git.clearspring.local/ccompressor.git</connection>
+    <developerConnection>scm:git:http://git.clearspring.local/ccompressor.git</developerConnection>
+    <url>scm:git:http://git.clearspring.local/ccompressor.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
+</project>
