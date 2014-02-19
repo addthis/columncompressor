@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.addthis.basis.util.Bytes;
 
-import com.addthis.bundle.core.BundleField;
 
 public class RunLengthColumn extends AbstractColumn<byte[]> {
 

@@ -125,7 +125,7 @@ public class ColumnRowCompressor implements RowWriter {
                         column.push(val == null ? 0 : val.asLong().getLong().intValue());
                         break;
                     case DELTALONG:
-                        column.push(val == null ? 0l : val.asLong().getLong());
+                        column.push(val == null ? 0L : val.asLong().getLong());
                         break;
                     default:
                         logger.error("Unknown column type {}", column.getColumnType());
