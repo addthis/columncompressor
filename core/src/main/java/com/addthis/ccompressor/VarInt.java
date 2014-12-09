@@ -30,7 +30,6 @@ import java.io.InputStream;
  * <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html">
  * Google's Protocol Buffers</a>. It uses fewer bytes to encode smaller values,
  * but will use slightly more bytes to encode large values.</p>
- * <p/>
  * <p>Signed values are further encoded using so-called zig-zag encoding
  * in order to make them "compatible" with variable-length encoding.</p>
  */

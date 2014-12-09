@@ -48,7 +48,7 @@ public class DefaultColumnTest {
         ListBundleFormat format = new ListBundleFormat();
         BundleField bundleField = format.getField("foo");
         DefaultColumn defaultColumn = new DefaultColumn(bundleField.getName());
-        byte[] helloBytes = ValueFactory.create("hello world").asBytes().getBytes();
+        byte[] helloBytes = ValueFactory.create("hello world").asBytes().asNative();
         defaultColumn.push(helloBytes);
         defaultColumn.push(helloBytes);
         defaultColumn.push(helloBytes);
@@ -92,7 +92,7 @@ public class DefaultColumnTest {
         while (results.hasNext()) {
             Bundle b = results.next();
             ValueObject value = b.getValue(b.getFormat().getField("default"));
-            String valueString = (value == null) ? null : value.asString().getString();
+            String valueString = (value == null) ? null : value.asString().asNative();
             assertEquals(valueString, values.get(resultCount % values.size()));
             resultCount++;
         }
