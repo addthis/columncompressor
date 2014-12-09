@@ -122,7 +122,7 @@ public class ColumnRowCompressor implements RowWriter {
                         column.push(val == null ? new byte[0] : val.asString().toString().getBytes());
                         break;
                     case DELTAINT:
-                        column.push(val == null ? 0 : val.asLong().getLong().intValue());
+                        column.push(val == null ? 0 : val.asLong().asNative().intValue());
                         break;
                     case DELTALONG:
                         column.push(val == null ? 0L : val.asLong().getLong());
