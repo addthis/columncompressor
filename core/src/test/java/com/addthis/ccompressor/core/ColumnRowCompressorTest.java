@@ -106,13 +106,13 @@ public class ColumnRowCompressorTest {
             assertEquals(b.getValue(b.getFormat().getField("barColumn")).asString().toString(), "barfoo");
             assertEquals(b.getValue(b.getFormat().getField("textColumn")).asString().toString(), "textfoo");
             assertEquals(b.getValue(b.getFormat().getField("runlength")).asString().toString(), "runlength");
-            assertEquals("miss on " + resultCount, b.getValue(b.getFormat().getField("deltaint")).asLong().getLong().intValue(), startVal + resultCount);
-            assertEquals("miss on " + resultCount, b.getValue(b.getFormat().getField("deltalong")).asLong().getLong().longValue(), (long) (startVal + resultCount));
+            assertEquals("miss on " + resultCount, b.getValue(b.getFormat().getField("deltaint")).asLong().getLong(), startVal + resultCount);
+            assertEquals("miss on " + resultCount, b.getValue(b.getFormat().getField("deltalong")).asLong().getLong(), (long) (startVal + resultCount));
             if (resultCount % 3 == 0) {
                 assertEquals(b.getValue(b.getFormat().getField("somenulls")).asString().toString(), "somenulls" + resultCount);
                 assertEquals(b.getValue(b.getFormat().getField("somenulls2")).asString().toString(), "somenulls2");
-                assertEquals(b.getValue(b.getFormat().getField("somenulls3")).asLong().getLong().intValue(), 3);
-                assertEquals(b.getValue(b.getFormat().getField("somenulls4")).asLong().getLong(), new Long(4));
+                assertEquals(b.getValue(b.getFormat().getField("somenulls3")).asLong().getLong(), 3);
+                assertEquals(b.getValue(b.getFormat().getField("somenulls4")).asLong().getLong(), 4);
                 assertEquals(b.getValue(b.getFormat().getField("somenulls5")).asString().toString(), "somenulls5");
             }
             resultCount++;

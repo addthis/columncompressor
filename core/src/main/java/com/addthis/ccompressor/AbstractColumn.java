@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.addthis.basis.util.Bytes;
+import com.addthis.basis.util.LessBytes;
 
 import com.addthis.bundle.core.Bundle;
 import com.addthis.bundle.core.BundleField;
@@ -66,12 +66,12 @@ public abstract class AbstractColumn<T> implements Column<T> {
 
     public static void writeColumnHeader(byte[] columnBlockBytes, byte version, ColumnType columnType, int totalLength) {
         columnBlockBytes[0] = version;
-        System.arraycopy(Bytes.toBytes(columnType.getId()), 0, columnBlockBytes, 1, 4);
-        System.arraycopy(Bytes.toBytes(totalLength), 0, columnBlockBytes, 5, 4);
+        System.arraycopy(LessBytes.toBytes(columnType.getId()), 0, columnBlockBytes, 1, 4);
+        System.arraycopy(LessBytes.toBytes(totalLength), 0, columnBlockBytes, 5, 4);
     }
 
     public static ColumnHeader readHeader(InputStream inputStream) throws IOException {
-        return new ColumnHeader((byte) inputStream.read(), ColumnType.get(Bytes.readInt(inputStream)), Bytes.readInt(inputStream));
+        return new ColumnHeader((byte) inputStream.read(), ColumnType.get(LessBytes.readInt(inputStream)), LessBytes.readInt(inputStream));
     }
 
     protected void writeColumnChunk(byte[] bytes) throws IOException {
@@ -100,7 +100,7 @@ public abstract class AbstractColumn<T> implements Column<T> {
 
     protected static byte[] decodeColumnValue(InputStream inputStream) throws IOException {
         int length = VarInt.readUnsignedVarInt(inputStream);
-        return Bytes.readBytes(inputStream, length);
+        return LessBytes.readBytes(inputStream, length);
     }
 
     public static Column createColumn(String name, ColumnType columnType) {

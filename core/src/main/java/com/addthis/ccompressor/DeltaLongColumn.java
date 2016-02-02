@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.addthis.basis.util.Bytes;
+import com.addthis.basis.util.LessBytes;
 
 public class DeltaLongColumn extends AbstractColumn<Long> {
 
@@ -53,7 +53,7 @@ public class DeltaLongColumn extends AbstractColumn<Long> {
 
     public static List<Long> readColumnValues(InputStream inputStream, int payloadLength) throws IOException {
 
-        byte[] bytes = Bytes.readBytes(inputStream, payloadLength);
+        byte[] bytes = LessBytes.readBytes(inputStream, payloadLength);
 
         List<Long> byteValues = new ArrayList<>();
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));

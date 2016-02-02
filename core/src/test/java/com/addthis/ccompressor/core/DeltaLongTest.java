@@ -67,7 +67,7 @@ public class DeltaLongTest {
         int resultCount = 0;
         while (results.hasNext()) {
             Bundle b = results.next();
-            assertEquals(b.getValue(b.getFormat().getField("deltaLong")).asLong().getLong(), new Long(values.get(resultCount % values.size())));
+            assertEquals(b.getValue(b.getFormat().getField("deltaLong")).asLong().asNative(), new Long(values.get(resultCount % values.size())));
             resultCount++;
         }
         assertEquals(bundles, resultCount);

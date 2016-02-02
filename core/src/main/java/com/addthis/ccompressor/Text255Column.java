@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.addthis.basis.util.Bytes;
+import com.addthis.basis.util.LessBytes;
 
 public class Text255Column extends AbstractColumn<byte[]> {
 
@@ -79,7 +79,7 @@ public class Text255Column extends AbstractColumn<byte[]> {
             if (indexMap.containsKey(value)) {
                 Integer indexVal = indexMap.get(value);
                 byteArrayOutputStream.write(VarInt.writeUnsignedVarInt(1));
-                byteArrayOutputStream.write(Bytes.toBytes(indexVal)[3]);
+                byteArrayOutputStream.write(LessBytes.toBytes(indexVal)[3]);
             } else {
                 writeColumnChunk(value.getData());
             }
@@ -93,7 +93,7 @@ public class Text255Column extends AbstractColumn<byte[]> {
         int totalLength = byteArrayOutputStream.size() + textBytes.length + 1 + payloadLength.length;
         byte[] columnBlockBytes = new byte[totalLength + HEADER_SIZE];
         writeColumnHeader(columnBlockBytes, VERSION, getColumnType(), totalLength);
-        columnBlockBytes[9] = Bytes.toBytes(indexMap.size())[3];
+        columnBlockBytes[9] = LessBytes.toBytes(indexMap.size())[3];
         System.arraycopy(textBytes, 0, columnBlockBytes, 9 + 1, textBytes.length);
         System.arraycopy(payloadLength, 0, columnBlockBytes, 9 + 1 + textBytes.length, payloadLength.length);
         System.arraycopy(outBytes, 0, columnBlockBytes, 9 + 1 + textBytes.length + payloadLength.length, outBytes.length);
@@ -137,16 +137,16 @@ public class Text255Column extends AbstractColumn<byte[]> {
 
     public static List<String> readColumnValues(InputStream inputStream, int payloadLength) throws IOException {
         Map<Integer, ByteArrayWrapper> keyMap = new HashMap<>();
-        int totalKeys = Bytes.readBytes(inputStream, 1)[0] & 0xFF;
+        int totalKeys = LessBytes.readBytes(inputStream, 1)[0] & 0xFF;
         for (int i = 0; i < totalKeys; i++) {
             int index = VarInt.readUnsignedVarInt(inputStream);
             int length = VarInt.readUnsignedVarInt(inputStream);
-            byte[] value = Bytes.readBytes(inputStream, length);
+            byte[] value = LessBytes.readBytes(inputStream, length);
             keyMap.put(index, new ByteArrayWrapper(value));
         }
 
         int dataLength = VarInt.readUnsignedVarInt(inputStream);
-        byte[] bytes = Bytes.readBytes(inputStream, dataLength);
+        byte[] bytes = LessBytes.readBytes(inputStream, dataLength);
         List<byte[]> columnValues = Text255Column.decodeBytes(new ByteArrayInputStream(bytes));
         return Text255Column.convert(columnValues, keyMap);
     }
