@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.addthis.basis.util.Bytes;
+import com.addthis.basis.util.LessBytes;
 
 
 public class RunLengthColumn extends AbstractColumn<byte[]> {
@@ -83,7 +83,7 @@ public class RunLengthColumn extends AbstractColumn<byte[]> {
 
     public static List<String> readColumnValues(InputStream inputStream, int payloadLength) throws IOException {
 
-        byte[] bytes = Bytes.readBytes(inputStream, payloadLength);
+        byte[] bytes = LessBytes.readBytes(inputStream, payloadLength);
 
         List<String> byteValues = new ArrayList<>();
         ByteArrayInputStream bis = new ByteArrayInputStream(bytes);

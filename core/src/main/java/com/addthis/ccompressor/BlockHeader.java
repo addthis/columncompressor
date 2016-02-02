@@ -23,7 +23,7 @@ import java.util.List;
 
 import java.nio.ByteBuffer;
 
-import com.addthis.basis.util.Bytes;
+import com.addthis.basis.util.LessBytes;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class BlockHeader {
 
     public static BlockHeader readHeader(InputStream inputStream) throws IOException {
 
-        byte[] blockHeader = Bytes.readBytes(inputStream, 9);
+        byte[] blockHeader = LessBytes.readBytes(inputStream, 9);
         ByteBuffer bb = ByteBuffer.wrap(blockHeader);
         // not currently used but may be in the future
         byte version = bb.get();
@@ -58,8 +58,8 @@ public class BlockHeader {
         List<Column> columnList = new ArrayList<>();
         int numColumns = bb.getInt(5);
         for (int i = 0; i < numColumns; i++) {
-            String fieldName = Bytes.readString(inputStream);
-            int columnInt = Bytes.readInt(inputStream);
+            String fieldName = LessBytes.readString(inputStream);
+            int columnInt = LessBytes.readInt(inputStream);
             ColumnType columnType = ColumnType.get(columnInt);
             Column c;
             if (fieldName == null) {
@@ -84,10 +84,10 @@ public class BlockHeader {
         outputStream.write((totalValueBytes >>> 8) & 0xFF);
         outputStream.write(totalValueBytes & 0xFF);
         // write field info
-        Bytes.writeInt(columnList.size(), outputStream);
+        LessBytes.writeInt(columnList.size(), outputStream);
         for (Column column : columnList) {
-            Bytes.writeString(column.getName(), outputStream);
-            Bytes.writeInt(column.getColumnType().getId(), outputStream);
+            LessBytes.writeString(column.getName(), outputStream);
+            LessBytes.writeInt(column.getColumnType().getId(), outputStream);
         }
     }
 }

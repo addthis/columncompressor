@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import com.addthis.basis.util.Bytes;
+import com.addthis.basis.util.LessBytes;
 
 import com.addthis.bundle.core.Bundle;
 import com.addthis.bundle.core.BundleFactory;
@@ -194,7 +194,7 @@ public class ColumnRowReader implements RowReader {
                 switch (header.columnType) {
                     case RAW:
                         int length = header.length;
-                        byte[] bytes = Bytes.readBytes(inputStream, length);
+                        byte[] bytes = LessBytes.readBytes(inputStream, length);
                         columnByteList.add(DefaultColumn.decodeBytes(new ByteArrayInputStream(bytes)));
                         break;
                     case TEXT255:
